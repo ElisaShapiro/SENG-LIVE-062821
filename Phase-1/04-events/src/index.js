@@ -7,10 +7,8 @@ document.querySelector('#book-form').addEventListener('submit',(e)=> {
     price:e.target.price.value,
     image_url:e.target.image_url.value,
     inventory: 0,
-    // reviews: e.target.reviews[1].content.value,
-  
   }
-  // console.log(reviews)
+  
   renderCard(newBook)
 })
 
@@ -35,36 +33,40 @@ function renderCard(book){
   let pReviews = document.createElement('p')
   let btn = document.createElement('button')
 
+  let bookReviews = ""
+  book.reviews.forEach(rev => {
+    bookReviews += rev.content;
+  })
+
   li.className = 'card'
   img.src = book.image_url
   h4Title.textContent = book.title 
   h4Author.textContent = book.author
   pPrice.textContent = `Price: ${book.price}`
   pInventory.textContent = `Inventory: ${book.inventory}`
-  // pReviews.textContent = `${book.pReviews}`
+  pReviews.textContent = `${bookReviews}`
   btn.textContent = 'Add Inventory'
 
+ 
   btn.addEventListener('click', () => {
     book.inventory+=1
     pInventory.textContent = `Inventory: ${book.inventory}`
   })
 
-  // function getReviews() {
-  //   console.log(Object.values(reviews)[1])
-    
+
+  // document.createElement("form").addEventListener('submit', (e) => {
+  //   e.preventDefault()
+  //   let newReview = {
+  //     user_id: e.target.user_id.value
+  //     thoughts: e.target.content.value
+  //   }
+  // }
   // }
   //HomeWork-------------------------------------------------
   //The books has an array of reviews
   //Add the review content to the card. 
   //Bonus
   //Add a form to the card that will render a new review to the card. 
-
-  // reviews.forEach(reviewFunction);
-  //   document.getElementsByName("reviews").innerHTML = text
-  
-  // function reviewFunction (content)
-  //   text = content <br>
-
 
   li.append(img, h4Title, h4Author, pPrice, pInventory, pReviews, btn)
   document.querySelector('#book-list').prepend(li)
