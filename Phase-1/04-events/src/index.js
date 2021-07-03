@@ -7,8 +7,10 @@ document.querySelector('#book-form').addEventListener('submit',(e)=> {
     price:e.target.price.value,
     image_url:e.target.image_url.value,
     inventory: 0,
-    reviews: []
+    // reviews: e.target.reviews[1].content.value,
+  
   }
+  // console.log(reviews)
   renderCard(newBook)
 })
 
@@ -30,6 +32,7 @@ function renderCard(book){
   let img = document.createElement('img')
   let pPrice = document.createElement('p')
   let pInventory = document.createElement('p')
+  let pReviews = document.createElement('p')
   let btn = document.createElement('button')
 
   li.className = 'card'
@@ -38,20 +41,32 @@ function renderCard(book){
   h4Author.textContent = book.author
   pPrice.textContent = `Price: ${book.price}`
   pInventory.textContent = `Inventory: ${book.inventory}`
+  // pReviews.textContent = `${book.pReviews}`
   btn.textContent = 'Add Inventory'
 
   btn.addEventListener('click', () => {
-    console.log('hi')
     book.inventory+=1
     pInventory.textContent = `Inventory: ${book.inventory}`
   })
+
+  // function getReviews() {
+  //   console.log(Object.values(reviews)[1])
+    
+  // }
   //HomeWork-------------------------------------------------
   //The books has an array of reviews
   //Add the review content to the card. 
   //Bonus
   //Add a form to the card that will render a new review to the card. 
 
-  li.append(img, h4Title, h4Author, pPrice, pInventory, btn)
+  // reviews.forEach(reviewFunction);
+  //   document.getElementsByName("reviews").innerHTML = text
+  
+  // function reviewFunction (content)
+  //   text = content <br>
+
+
+  li.append(img, h4Title, h4Author, pPrice, pInventory, pReviews, btn)
   document.querySelector('#book-list').prepend(li)
 
 }
@@ -83,7 +98,7 @@ function initialRender(){
   // the forEach above and below are doing the same thing
   // the one below has an unnecessary nested callback
   // the above is using renderCard as the callback
-  bookStore.inventory.forEach(book => renderCard(book))
+  
 
 }
 initialRender()
